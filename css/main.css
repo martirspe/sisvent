@@ -1,0 +1,45 @@
+/* PRODUCTOS */
+
+.table-action .link-edit {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.table-action .link-edit:hover {
+    color: #2979ff;
+    text-decoration: none;
+}
+
+.table-action .link-delete {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.table-action .link-delete:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.table-action .link-change {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.table-action .link-change:hover {
+    color: #00c853;
+    text-decoration: none;
+}
+
+
+/* Lista de ítems en selectores */
+
+.first-item option:first-child {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .form-control {
+        padding: .35rem .710rem;
+    }
+}
+
