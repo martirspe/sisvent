@@ -23,7 +23,7 @@ if (empty($dni) || empty($nombres) || empty($apellidos) || empty($movil) || empt
             <i class="far fa-fw fa-bell"></i>
         </div>
         <div class="alert-message">
-            <strong>Alerta!</strong> Todos los campos son obligatorios.
+            Todos los campos son obligatorios.
         </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>';
@@ -33,7 +33,7 @@ if (empty($dni) || empty($nombres) || empty($apellidos) || empty($movil) || empt
             <i class="far fa-fw fa-bell"></i>
         </div>
         <div class="alert-message">
-            <strong>Alerta!</strong> Las contraseñas ingresadas no coinciden.
+            Las contraseñas ingresadas no coinciden.
         </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>';
@@ -43,7 +43,7 @@ if (empty($dni) || empty($nombres) || empty($apellidos) || empty($movil) || empt
             <i class="far fa-fw fa-bell"></i>
         </div>
         <div class="alert-message">
-            <strong>Alerta!</strong> La dirección de correo electrónico no es válida.
+            La dirección de correo electrónico no es válida.
         </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>';
@@ -61,7 +61,7 @@ if (empty($dni) || empty($nombres) || empty($apellidos) || empty($movil) || empt
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Alerta!</strong> El usuario ya está registrado.
+                El usuario ya está registrado.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>';
@@ -82,7 +82,7 @@ if (empty($dni) || empty($nombres) || empty($apellidos) || empty($movil) || empt
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Éxito!</strong> Usuario registrado correctamente.
+                Usuario registrado correctamente.
             </div>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>';
@@ -92,7 +92,7 @@ if (empty($dni) || empty($nombres) || empty($apellidos) || empty($movil) || empt
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Error!</strong> Error al registrar usuario.
+                Error al registrar usuario.
             </div>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>';

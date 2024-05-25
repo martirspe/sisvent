@@ -14,18 +14,18 @@ if (isset($_FILES['imagen']['tmp_name']) && !empty($_FILES['imagen']['tmp_name']
     $imagen = $_FILES['imagen']['tmp_name'];
     $image_extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
     $nameimg = 'img-' . date('dmY-His') . '.' . $image_extension;
-    $route = $_SERVER['DOCUMENT_ROOT'] . '/sispro/img/products/categories/' . $nameimg;
-    $route_xampp = 'img/products/categories/' . $nameimg;
+    $route = $_SERVER['DOCUMENT_ROOT'] . '/sispro/img/products/brands/' . $nameimg;
+    $route_xampp = 'img/products/brands/' . $nameimg;
 
     // Mueve la imagen del formulario al directorio correcto.
     move_uploaded_file($imagen, $route);
 } else {
     // Si no se proporcionó una imagen, asignar una por defecto.
-    $route_xampp = 'img/default/category.png';
+    $route_xampp = 'img/default/brand.png';
 }
 
-// Verificando que la categoría ingresada en el formulario no esté registrada.
-$query = "SELECT nombre FROM categorias WHERE nombre = ?";
+// Verificando que la marca ingresada en el formulario no esté registrada.
+$query = "SELECT nombre FROM marcas WHERE nombre = ?";
 $stmt = mysqli_prepare($open_connection, $query);
 mysqli_stmt_bind_param($stmt, 's', $nombre);
 mysqli_stmt_execute($stmt);
@@ -38,14 +38,14 @@ if (mysqli_stmt_num_rows($stmt) > 0) {
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                Ya existe una categoría con el mismo nombre.
+                Ya existe una marca con el mismo nombre.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
     ';
 } else {
-    // Insertar la nueva categoría en la base de datos.
-    $query = "INSERT INTO categorias (imagen, nombre, descripcion, estado) VALUES (?, ?, ?, 1)";
+    // Insertar la nueva marca en la base de datos.
+    $query = "INSERT INTO marcas (imagen, nombre, descripcion, estado) VALUES (?, ?, ?, 1)";
     $stmt = mysqli_prepare($open_connection, $query);
     mysqli_stmt_bind_param($stmt, 'sss', $route_xampp, $nombre, $descripcion);
     $result = mysqli_stmt_execute($stmt);
@@ -57,7 +57,7 @@ if (mysqli_stmt_num_rows($stmt) > 0) {
                     <i class="far fa-fw fa-bell"></i>
                 </div>
                 <div class="alert-message">
-                    Categoría guardada correctamente.
+                    Marca guardada correctamente.
                 </div>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
@@ -69,7 +69,7 @@ if (mysqli_stmt_num_rows($stmt) > 0) {
                     <i class="far fa-fw fa-bell"></i>
                 </div>
                 <div class="alert-message">
-                    Error al guardar categoría.
+                    Error al guardar marca.
                 </div>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>

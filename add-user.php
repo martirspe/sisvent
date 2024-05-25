@@ -132,20 +132,20 @@ if ($result && mysqli_num_rows($result) > 0) {
                                                                 data-feather="lock"></i></span>
                                                     </div>
                                                     <input type="password" name="password" class="form-control"
-                                                        placeholder="Introduce una contraseña" required>
+                                                        placeholder="Ingrese una contraseña" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Dirección</label>
                                             <input type="text" name="direccion" class="form-control"
-                                                placeholder="Av. Marginal #145 - ATE, Lima" required>
+                                                placeholder="Ingrese una dirección" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label w-100">Foto de perfil</label>
                                             <input type="file" name="imagen">
-                                            <small class="form-text text-muted">Elija la imagen del producto que va
-                                                añadir.</small>
+                                            <small class="form-text text-muted">Elija una nueva imagen para este
+                                                usuario.</small>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Añadir Usuario</button>
                                         <button type="reset" class="btn btn-secondary">Limpiar</button>

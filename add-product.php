@@ -33,7 +33,8 @@ if (empty($_SESSION['active'])) {
                         $query = "SELECT id_categoria FROM categorias";
                         $results = mysqli_query($open_connection, $query);
                         if (mysqli_num_rows($results)>0) { ?>
-                        <div class="col-12 col-md-6 offset-md-1 col-xl-6 offset-xl-3">
+                        <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-3">
+                            <div class="mt-3" id="success-add-product"></div>
                             <div class="card">
                                 <div class="card-header">
                                     <h5 class="card-title">Nuevo Producto</h5>
@@ -45,29 +46,31 @@ if (empty($_SESSION['active'])) {
                                         enctype="multipart/form-data">
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <label class="form-label">Nombre del Producto</label>
+                                                <label class="form-label">Nombre</label>
                                                 <input type="text" name="nombre" class="form-control"
-                                                    placeholder="Calzado de Puro Cuero" pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
+                                                    placeholder="Ingrese un nombre para este producto"
+                                                    pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
                                                     title="El nombre debe contener solo letras y espacios" required>
                                             </div>
                                         </div>
                                         <div class="form-row">
-											<div class="form-group col-md-3">
-												<label class="form-label">Código</label>
-												<input type="text" name="codigo" class="form-control" placeholder="1001"
-													required>
-											</div>
-											<div class="form-group col-md-3">
-												<label class="form-label">Modelo</label>
-												<input type="text" name="modelo" class="form-control" placeholder="508"
-													required>
-											</div>
-											<div class="form-group col-md-3">
-												<label class="form-label">Color</label>
-												<input type="text" name="color" class="form-control" placeholder="Negro"
-													pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
-													title="El color debe contener solo letras y espacios" required>
-											</div>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Código</label>
+                                                <input type="text" name="codigo" class="form-control" placeholder="100"
+                                                    pattern="[0-9]+"
+                                                    title="El código de producto debe contener solo números" required>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Modelo</label>
+                                                <input type="text" name="modelo" class="form-control" placeholder="100"
+                                                    required>
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Color</label>
+                                                <input type="text" name="color" class="form-control" placeholder="Negro"
+                                                    pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
+                                                    title="El color debe contener solo letras y espacios" required>
+                                            </div>
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Marca</label>
                                                 <select name="marca" class="form-control first-item" required>
@@ -83,7 +86,7 @@ if (empty($_SESSION['active'])) {
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Categoría</label>
                                                 <select name="categoria" class="form-control first-item" required>
                                                     <option value="">Elije</option>
@@ -96,7 +99,12 @@ if (empty($_SESSION['active'])) {
                                                     <?php } ?>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">Cantidad</label>
+                                                <input type="number" name="cantidad" class="form-control"
+                                                    placeholder="10" required>
+                                            </div>
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Precio</label>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -111,23 +119,21 @@ if (empty($_SESSION['active'])) {
                                         <div class="form-group">
                                             <label class="form-label">Descripción</label>
                                             <textarea class="form-control" name="descripcion"
-                                                placeholder="Escribe una descripción corta para este producto." rows="3"
+                                                placeholder="Escribe una descripción corta para este producto" rows="3"
                                                 pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
-                                                title="La descripción debe contener solo letras y espacios"
-                                                required></textarea>
+                                                title="La descripción debe contener solo letras y espacios"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label w-100">Imagen</label>
                                             <input type="file" name="imagen">
-                                            <small class="form-text text-muted">Elija la imagen del producto que va
-                                                añadir.</small>
+                                            <small class="form-text text-muted">Elija una nueva imagen para este
+                                                producto.</small>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Añadir Producto</button>
                                         <button type="reset" class="btn btn-secondary">Limpiar</button>
                                     </form>
                                 </div>
                             </div>
-                            <div class="mt-3" id="success-add-product"></div>
                         </div>
                         <?php 
 						} else { ?>

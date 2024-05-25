@@ -178,7 +178,6 @@ $(document).ready(function () {
                 $("#success-add-product").html(result);
                 $("#success-add-product").fadeIn("slow");
                 $("#success-add-product").delay(2000).fadeOut("slow");
-                setTimeout("location.href = 'all-products.php'", 2000);
             }
         });
 
@@ -205,7 +204,6 @@ $(document).ready(function () {
                 $("#success-update-product").html(result);
                 $("#success-update-product").fadeIn("slow");
                 $("#success-update-product").delay(2000).fadeOut("slow");
-                setTimeout("location.href = 'all-products.php'", 2000);
             }
         });
 
@@ -261,7 +259,6 @@ $(document).ready(function () {
                 $("#success-add-category").html(result);
                 $("#success-add-category").fadeIn("slow");
                 $("#success-add-category").delay(2000).fadeOut("slow");
-                setTimeout("location.href = 'all-categories.php'", 2000);
             }
         });
 
@@ -288,7 +285,6 @@ $(document).ready(function () {
                 $("#success-update-category").html(result);
                 $("#success-update-category").fadeIn("slow");
                 $("#success-update-category").delay(2000).fadeOut("slow");
-                setTimeout("location.href = 'all-categories.php'", 2000);
             }
         });
 
@@ -316,6 +312,86 @@ $(document).ready(function () {
                 $("#success-delete-category").html(result);
                 $("#success-delete-category").fadeIn("slow");
                 $("#success-delete-category").delay(2000).fadeOut("slow");
+            },
+            complete: function () {
+                setTimeout("location.reload()", 2000);
+            }
+        });
+    });
+
+    // INSERT BRAND
+    var addBrand = $("#add-brand");
+    addBrand.bind("submit", function () {
+
+        var formData = new FormData($("#add-brand")[0]);
+
+        $.ajax({
+            url: addBrand.attr("action"),
+            type: addBrand.attr("method"),
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function () {
+                $("#success-add-brand").html("Guardando categoría...");
+            },
+            success: function (result) {
+                $("#success-add-brand").html(result);
+                $("#success-add-brand").fadeIn("slow");
+                $("#success-add-brand").delay(2000).fadeOut("slow");
+            }
+        });
+
+        return false;
+    });
+
+    // UPDATE BRAND
+    var updateBrand = $("#update-brand");
+    updateBrand.bind("submit", function () {
+
+        var formData = new FormData($("#update-brand")[0]);
+
+        $.ajax({
+            url: updateBrand.attr("action"),
+            type: updateBrand.attr("method"),
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            beforeSend: function () {
+                $("#success-update-brand").html("Actualizando categoría...");
+            },
+            success: function (result) {
+                $("#success-update-brand").html(result);
+                $("#success-update-brand").fadeIn("slow");
+                $("#success-update-brand").delay(2000).fadeOut("slow");
+            }
+        });
+
+        return false;
+    });
+
+    // DELETE CATEGORY
+    $(document).on("click", "#delete-brand", function (e) {
+        //Con esto detenemos la función nativa del selector
+        e.preventDefault();
+        e.stopPropagation();
+
+        //Recuperamos el ID del atributo data-id
+        let id = $(this).data('id');
+
+        //Enviamos el AJAX
+        $.ajax({
+            type: "GET",
+            url: "inc/delete-brand.php",
+            data: { id },
+            beforeSend: function () {
+                $("#success-delete-brand").html("Eliminando producto...");
+            },
+            success: function (result) {
+                $("#success-delete-brand").html(result);
+                $("#success-delete-brand").fadeIn("slow");
+                $("#success-delete-brand").delay(2000).fadeOut("slow");
             },
             complete: function () {
                 setTimeout("location.reload()", 2000);

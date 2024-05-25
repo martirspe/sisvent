@@ -12,7 +12,7 @@ if (empty($_SESSION['active'])) {
     exit(); // Asegura que el script se detenga después de redirigir
 }
 
-$id_categoria = $_GET['id'];
+$id_marca = $_GET['id'];
 
 ?>
 
@@ -28,32 +28,32 @@ $id_categoria = $_GET['id'];
             <main class="content">
                 <div class="container-fluid p-0">
 
-                    <h1 class="h3 mb-3 text-center">Editar Categoría</h1>
+                    <h1 class="h3 mb-3 text-center">Editar Marca</h1>
 
                     <div class="row">
                         <?php
-						$query = "SELECT LPAD(id_categoria, 2, '0') AS id_categoria, imagen, nombre, descripcion FROM categorias WHERE id_categoria = '$id_categoria'";
+						$query = "SELECT LPAD(id_marca, 2, '0') AS id_marca, imagen, nombre, descripcion FROM marcas WHERE id_marca = '$id_marca'";
 						$results = mysqli_query($open_connection, $query);
 						while ($row = mysqli_fetch_array($results)) { ?>
                         <div class="col-12 col-md-10 offset-md-1 col-xl-8 offset-xl-2">
-                            <div class="mt-3" id="success-update-category"></div>
+                            <div class="mt-3" id="success-update-brand"></div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title">Actualizar Categoría</h5>
+                                    <h5 class="card-title">Actualizar Marca</h5>
                                     <h6 class="card-subtitle text-muted">Edite los campos necesarios, no deje campos
                                         vacíos.</h6>
                                 </div>
                                 <div class="card-body">
-                                    <form id="update-category" action="inc/update-category.php" method="POST"
+                                    <form id="update-brand" action="inc/update-brand.php" method="POST"
                                         enctype="multipart/form-data">
                                         <div class="form-row">
                                             <div class="form-group" hidden>
                                                 <label class="form-label">Código</label>
                                                 <input type="number" name="id" class="form-control"
-                                                    value="<?php echo $row['id_categoria'] ?>">
+                                                    value="<?php echo $row['id_marca'] ?>">
                                             </div>
                                             <div class="form-group col-md-12">
-                                                <label class="form-label">Nombre de la Categoría</label>
+                                                <label class="form-label">Nombre de la Marca</label>
                                                 <input type="text" name="nombre" class="form-control"
                                                     placeholder="Calzado" pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
                                                     title="La categoría debe contener solo letras y espacios"
@@ -78,11 +78,11 @@ $id_categoria = $_GET['id'];
                                                 <label class="form-label w-100">Cambiar Imagen</label>
                                                 <input type="file" name="imagen">
                                                 <small class="form-text text-muted">Elija una nueva imagen para esta
-                                                    categoría.</small>
+                                                    marca.</small>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Actualizar Categoría</button>
-                                        <a href="/sisvent/all-categories.php" class="btn btn-secondary">Cancelar</a>
+                                        <button type="submit" class="btn btn-primary">Actualizar Marca</button>
+                                        <a href="/sisvent/all-brands.php" class="btn btn-secondary">Cancelar</a>
                                     </form>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ if (mysqli_stmt_num_rows($stmt) > 0) {
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Alerta!</strong> El usuario ya está registrado.
+                El usuario ya está registrado.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
@@ -77,7 +77,7 @@ if ($result) {
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Alerta!</strong> Usuario guardado correctamente.
+                Usuario guardado correctamente.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
@@ -89,7 +89,7 @@ if ($result) {
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Alerta!</strong> Error al guardar usuario.
+                Error al guardar usuario.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>

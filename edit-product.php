@@ -12,7 +12,7 @@ if (empty($_SESSION['active'])) {
     exit(); // Asegura que el script se detenga después de redirigir
 }
 
-$id = $_GET['id'];
+$id_producto = $_GET['id'];
 
 ?>
 
@@ -38,6 +38,7 @@ $id = $_GET['id'];
                                     p.codigo, 
                                     p.modelo, 
                                     p.color, 
+                                    p.cantidad, 
                                     p.precio, 
                                     p.descripcion, 
                                     p.imagen, 
@@ -52,7 +53,7 @@ $id = $_GET['id'];
                                   LEFT JOIN 
                                     categorias c ON p.categoria_id = c.id_categoria
                                   WHERE 
-                                    p.id_producto='$id'";
+                                    p.id_producto='$id_producto'";
                         $results = mysqli_query($open_connection, $query);
                         if ($row = mysqli_fetch_array($results)) { ?>
                         <div class="col-12 col-md-6 offset-md-1 col-xl-6 offset-xl-3">
@@ -68,10 +69,10 @@ $id = $_GET['id'];
                                         enctype="multipart/form-data">
                                         <div class="form-row">
                                             <div class="form-group col-md-12">
-                                                <label class="form-label">Nombre del Producto</label>
+                                                <label class="form-label">Nombre</label>
                                                 <input type="text" name="nombre" class="form-control"
                                                     value="<?php echo $row['nombre']; ?>"
-                                                    placeholder="Calzado de Puro Cuero" pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
+                                                    placeholder="Ingrese un nombre para este producto" pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
                                                     title="El nombre debe contener solo letras y espacios" required>
                                             </div>
                                         </div>
@@ -79,12 +80,14 @@ $id = $_GET['id'];
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Código</label>
                                                 <input type="text" name="codigo" class="form-control"
-                                                    value="<?php echo $row['codigo']; ?>" placeholder="1001" required>
+                                                    value="<?php echo $row['codigo']; ?>" placeholder="100"
+                                                    pattern="[0-9]+"
+                                                    title="El código de producto debe contener solo números" required>
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Modelo</label>
                                                 <input type="text" name="modelo" class="form-control"
-                                                    value="<?php echo $row['modelo']; ?>" placeholder="508" required>
+                                                    value="<?php echo $row['modelo']; ?>" placeholder="100" required>
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Color</label>
@@ -109,7 +112,7 @@ $id = $_GET['id'];
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Categoría</label>
                                                 <select name="categoria" class="form-control first-item" required>
                                                     <option value="">Elije</option>
@@ -123,7 +126,12 @@ $id = $_GET['id'];
                                                     <?php } ?>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">Cantidad</label>
+                                                <input type="number" name="cantidad" class="form-control"
+                                                    value="<?php echo $row['cantidad']; ?>" placeholder="100" required>
+                                            </div>
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Precio</label>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
@@ -139,10 +147,9 @@ $id = $_GET['id'];
                                         <div class="form-group">
                                             <label class="form-label">Descripción</label>
                                             <textarea class="form-control" name="descripcion"
-                                                placeholder="Escribe una descripción corta para este producto." rows="3"
+                                                placeholder="Escribe una descripción corta para este producto" rows="3"
                                                 pattern="[A-Za-zÁÉÍÓÚáéíóú\s]+"
-                                                title="La descripción debe contener solo letras y espacios"
-                                                required><?php echo $row['descripcion']; ?></textarea>
+                                                title="La descripción debe contener solo letras y espacios"><?php echo $row['descripcion']; ?></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label w-100">Imagen</label>
@@ -152,13 +159,13 @@ $id = $_GET['id'];
                                         <div class="form-group">
                                             <label class="form-label w-100">Cambiar Imagen</label>
                                             <input type="file" name="imagen">
-                                            <small class="form-text text-muted">Elija la nueva imagen del producto si
-                                                desea cambiarla.</small>
+                                            <small class="form-text text-muted">Elija una nueva imagen para este
+                                                producto.</small>
                                         </div>
                                         <input type="hidden" name="id_producto"
                                             value="<?php echo $row['id_producto']; ?>">
                                         <button type="submit" class="btn btn-primary">Actualizar Producto</button>
-                                        <a href="productos.php" class="btn btn-secondary">Cancelar</a>
+                                        <a href="/sisvent/all-products.php" class="btn btn-secondary">Cancelar</a>
                                     </form>
                                 </div>
                             </div>

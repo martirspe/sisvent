@@ -6,7 +6,7 @@ include "open-connection.php";
 date_default_timezone_set('America/Bogota');
 
 // Recibiendo datos del formulario.
-$id = isset($_POST['id']) ? $_POST['id'] : '';
+$id_usuario = isset($_POST['id']) ? $_POST['id'] : '';
 $dni = isset($_POST['dni']) ? $_POST['dni'] : '';
 $nombres = isset($_POST['nombres']) ? $_POST['nombres'] : '';
 $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : '';
@@ -20,7 +20,7 @@ $imagen = isset($_FILES['imagen']['tmp_name']) ? $_FILES['imagen']['tmp_name'] :
 // Verificar si el DNI o correo electrónico ya están registrados para otro usuario
 $query_duplicate = "SELECT id_usuario FROM usuarios WHERE (dni = ? OR email = ?) AND id_usuario != ?";
 $stmt_duplicate = mysqli_prepare($open_connection, $query_duplicate);
-mysqli_stmt_bind_param($stmt_duplicate, "ssi", $dni, $email, $id);
+mysqli_stmt_bind_param($stmt_duplicate, "ssi", $dni, $email, $id_usuario);
 mysqli_stmt_execute($stmt_duplicate);
 mysqli_stmt_store_result($stmt_duplicate);
 $num_rows = mysqli_stmt_num_rows($stmt_duplicate);
@@ -46,7 +46,7 @@ if ($num_rows > 0) {
 if (empty($imagen)) {
     $query = "SELECT imagen FROM usuarios WHERE id_usuario = ?";
     $stmt = mysqli_prepare($open_connection, $query);
-    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_bind_param($stmt, "i", $id_usuario);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_store_result($stmt);
     mysqli_stmt_bind_result($stmt, $db_image);
@@ -74,7 +74,7 @@ if (empty($imagen)) {
 // Obtener la contraseña actual del usuario desde la base de datos
 $query = "SELECT contrasena FROM usuarios WHERE id_usuario = ?";
 $stmt = mysqli_prepare($open_connection, $query);
-mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_bind_param($stmt, "i", $id_usuario);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_store_result($stmt);
 mysqli_stmt_bind_result($stmt, $db_password);
@@ -90,7 +90,7 @@ if (!empty($password)) {
 // Actualizando datos del usuario.
 $query = "UPDATE usuarios SET imagen = ?, dni = ?, nombres = ?, apellidos = ?, movil = ?, email = ?, direccion = ?, contrasena = ?, rol_id = ? WHERE id_usuario = ?";
 $stmt = mysqli_prepare($open_connection, $query);
-mysqli_stmt_bind_param($stmt, "sssssssssi", $default_image_path, $dni, $nombres, $apellidos, $movil, $email, $direccion, $hashed_password, $rol, $id);
+mysqli_stmt_bind_param($stmt, "sssssssssi", $default_image_path, $dni, $nombres, $apellidos, $movil, $email, $direccion, $hashed_password, $rol, $id_usuario);
 $result = mysqli_stmt_execute($stmt);
 
 if ($result) {
@@ -100,7 +100,7 @@ if ($result) {
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Alerta!</strong> Usuario actualizado correctamente.
+                Usuario actualizado correctamente.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
@@ -112,7 +112,7 @@ if ($result) {
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Alerta!</strong> Error al actualizar usuario.
+                Error al actualizar usuario.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>

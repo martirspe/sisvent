@@ -19,28 +19,8 @@ if (isset($_SESSION['rol_id']) && $_SESSION['rol_id'] == 2) {
     $usuario_cliente = true;
 }
 
-// Obtener roles de la base de datos
-$query = "SELECT id_rol, nombre FROM roles";
-$result = mysqli_query($open_connection, $query);
-
-// Verificar si se obtuvieron resultados de la consulta
-if ($result && mysqli_num_rows($result) > 0) {
-    // Crear opciones para el combo de rol de usuario
-    $options = '';
-    while ($row = mysqli_fetch_assoc($result)) {
-        // Si el usuario es un cliente y el rol actual es Administrador, no agregarlo a las opciones
-        if ($usuario_cliente && $row['nombre'] === 'Administrador') {
-            continue;
-        }
-        $options .= '<option value="' . $row['id_rol'] . '">' . $row['nombre'] . '</option>';
-    }
-} else {
-    // Si no se obtuvieron resultados, mostrar un mensaje de error o manejar la situación de otra manera
-    $options = '<option value="">No hay roles disponibles</option>';
-}
-
 // Obtener el ID del usuario de la consulta GET
-$id = isset($_GET['id']) ? $_GET['id'] : '';
+$id_usuario = isset($_GET['id']) ? $_GET['id'] : '';
 
 ?>
 
@@ -60,7 +40,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
 
                     <div class="row">
                         <?php
-                        $query = "SELECT id_usuario, imagen, dni, nombres, apellidos, movil, email, direccion, rol_id, estado FROM usuarios WHERE id_usuario = '$id'";
+                        $query = "SELECT id_usuario, imagen, dni, nombres, apellidos, movil, email, direccion, rol_id, estado FROM usuarios WHERE id_usuario = '$id_usuario'";
                         $results = mysqli_query($open_connection, $query);
 						while ($row = mysqli_fetch_array($results)) { ?>
                         <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-3">
@@ -106,16 +86,32 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6" hidden>
-                                                <label class="form-label">Tipo de usuario</label>
-                                                <select name="tipo" class="form-control first-item" required>
-                                                    <?php echo $options; ?>
+                                                <label class="form-label">Rol de usuario</label>
+                                                <select name="tipo" class="form-control first-item">
+                                                    <option value="">Elije un rol de usuario</option>
+                                                    <?php
+                                                    $marca_query = "SELECT id_rol, nombre FROM roles";
+                                                    $marca_results = mysqli_query($open_connection, $marca_query);
+                                                    while ($roles_row = mysqli_fetch_array($marca_results)) { ?>
+                                                    <option value="<?php echo $roles_row['id_rol']; ?>"
+                                                        <?php echo ($roles_row['id_rol'] == $row['rol_id']) ? 'selected' : ''; ?>>
+                                                        <?php echo $roles_row['nombre']; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label">Tipo de usuario</label>
+                                                <label class="form-label">Rol de usuario</label>
                                                 <select name="tipo" class="form-control first-item"
-                                                    <?php echo $usuario_cliente ? 'disabled' : ''; ?> required>
-                                                    <?php echo $options; ?>
+                                                    <?php echo ($usuario_cliente) ? 'disabled' : '';?>>
+                                                    <option value="">Elije un rol de usuario</option>
+                                                    <?php
+                                                    $marca_query = "SELECT id_rol, nombre FROM roles";
+                                                    $marca_results = mysqli_query($open_connection, $marca_query);
+                                                    while ($roles_row = mysqli_fetch_array($marca_results)) { ?>
+                                                    <option value="<?php echo $roles_row['id_rol']; ?>"
+                                                        <?php echo ($roles_row['id_rol'] == $row['rol_id']) ? 'selected' : ''; ?>>
+                                                        <?php echo $roles_row['nombre']; ?></option>
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -154,14 +150,14 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
                                                                 data-feather="lock"></i></span>
                                                     </div>
                                                     <input type="password" name="password" class="form-control"
-                                                        placeholder="Introduce una contraseña">
+                                                        placeholder="Ingrese una contraseña">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label">Dirección</label>
                                             <input type="text" name="direccion" class="form-control"
-                                                placeholder="Av. Marginal #145 - ATE, Lima"
+                                                placeholder="Ingrese una dirección"
                                                 value="<?php echo $row['direccion'] ?>" required>
                                         </div>
                                         <div class="form-row">
@@ -175,12 +171,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : '';
                                             <div class="form-group col-md-9 align-self-center">
                                                 <label class="form-label w-100">Foto de perfil</label>
                                                 <input type="file" name="imagen">
-                                                <small class="form-text text-muted">Elija la imagen del producto que va
-                                                    añadir.</small>
+                                                <small class="form-text text-muted">Elija una nueva imagen para este
+                                                    usuario.</small>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Actualizar Usuario</button>
-                                        <a href="/sisvent/all-users.php" class="btn btn-secondary">Ver usuarios</a>
+                                        <a href="/sisvent/all-users.php" class="btn btn-secondary">Cancelar</a>
                                     </form>
                                 </div>
                             </div>

@@ -72,7 +72,7 @@ if (empty($_SESSION['active'])) {
 
                                             // Preparar la consulta SQL
                                             $query = "SELECT
-                                                LPAD(u.id_usuario, 4, '0') AS id_usuario,
+                                                LPAD(u.id_usuario, 2, '0') AS id_usuario,
                                                 u.imagen,
                                                 u.dni,
                                                 u.nombres,
@@ -119,8 +119,7 @@ if (empty($_SESSION['active'])) {
                                                 <?php
                 									if ($row['rol_id'] != 1) { ?>
                                                 <a class="link-delete" id="delete-user" href="#"
-                                                    data-id="<?php echo $row['id_usuario'] ?>"
-                                                    onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">
+                                                    data-id="<?php echo $row['id_usuario'] ?>">
                                                     <i class="align-middle" data-feather="trash"></i>
                                                 </a>
 
@@ -128,7 +127,7 @@ if (empty($_SESSION['active'])) {
                                             </td>
                                         </tr>
                                         <?php }} else { ?>
-                                        <td class="text-center" colspan="8">
+                                        <td class="text-center" colspan="9">
                                             <i class="align-middle mr-1" data-feather="alert-circle"></i> No hay datos
                                             suficientes para mostrar.
                                         </td>
