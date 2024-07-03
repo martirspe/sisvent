@@ -139,7 +139,7 @@ if ($result && mysqli_num_rows($result) > 0) {
                                         <div class="form-group">
                                             <label class="form-label">Dirección</label>
                                             <input type="text" name="direccion" class="form-control"
-                                                placeholder="Ingrese una dirección" required>
+                                                placeholder="Ingrese la dirección de su domicilio" required>
                                         </div>
                                         <div class="form-group">
                                             <label class="form-label w-100">Foto de perfil</label>

@@ -70,6 +70,29 @@ $(document).ready(function () {
         });
     });
 
+    // RESET-PASSWORD
+    var rPWD = $("#reset-password");
+    rPWD.bind("submit", function () {
+
+        var formData = new FormData($("#reset-password")[0]);
+
+        $.ajax({
+            url: rPWD.attr("action"),
+            type: rPWD.attr("method"),
+            data: formData,
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: function (result) {
+                $("#message").html(result);
+                $("#message").fadeIn("slow");
+                $("#message").delay(2000).fadeOut("slow");
+            }
+        });
+
+        return false;
+    });
+
     // INSERT USER
     var addUser = $("#add-user");
     addUser.submit(function (event) {
@@ -371,7 +394,7 @@ $(document).ready(function () {
         return false;
     });
 
-    // DELETE CATEGORY
+    // DELETE BRAND
     $(document).on("click", "#delete-brand", function (e) {
         //Con esto detenemos la función nativa del selector
         e.preventDefault();

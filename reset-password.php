@@ -35,14 +35,15 @@ if (!empty($_SESSION['active'])) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="m-sm-4">
-                                    <form id="reset-password" method="POST">
+                                    <form id="reset-password" action="inc/reset-password.php" method="POST">
                                         <div class="form-group">
                                             <label>Email</label>
                                             <input class="form-control form-control-lg" type="email" name="email"
                                                 placeholder="Introduce tu correo electrónico" />
                                         </div>
                                         <div class="text-center mt-3">
-                                            <a href="#" class="btn btn-lg btn-primary">Restablecer contraseña</a>
+                                            <button type="submit" class="btn btn-lg btn-primary">Restablecer
+                                                contraseña</button>
                                             <a href="/sisvent/login.php" class="btn btn-lg btn-secondary">Regresar</a>
                                         </div>
                                     </form>

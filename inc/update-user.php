@@ -33,7 +33,7 @@ if ($num_rows > 0) {
                 <i class="far fa-fw fa-bell"></i>
             </div>
             <div class="alert-message">
-                <strong>Error!</strong> Ya existe otro usuario con el mismo DNI o correo electrónico.
+                Ya existe otro usuario con el mismo DNI o correo electrónico.
             </div>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>

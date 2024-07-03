@@ -60,7 +60,7 @@ if (empty($_SESSION['active'])) {
                                     </thead>
                                     <tbody>
                                         <?php
-										$query = "SELECT LPAD(id_categoria, 2, '0') AS id_categoria, imagen, nombre, descripcion FROM categorias WHERE estado = 1 ORDER BY nombre ASC";
+										$query = "SELECT LPAD(id_categoria, 2, '0') AS id_categoria, imagen, nombre, descripcion FROM categorias WHERE estado = 1 ORDER BY id_categoria DESC";
 										$results = mysqli_query($open_connection, $query);
 										if (mysqli_num_rows($results)>0) {
 											while ($row = mysqli_fetch_array($results)) { ?>

@@ -14,7 +14,7 @@ if (isset($_FILES['imagen']['tmp_name']) && !empty($_FILES['imagen']['tmp_name']
     $imagen = $_FILES['imagen']['tmp_name'];
     $image_extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
     $nameimg = 'img-' . date('dmY-His') . '.' . $image_extension;
-    $route = $_SERVER['DOCUMENT_ROOT'] . '/sispro/img/products/brands/' . $nameimg;
+    $route = $_SERVER['DOCUMENT_ROOT'] . '/sisvent/img/products/brands/' . $nameimg;
     $route_xampp = 'img/products/brands/' . $nameimg;
 
     // Mueve la imagen del formulario al directorio correcto.

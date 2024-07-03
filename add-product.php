@@ -12,6 +12,18 @@ if (empty($_SESSION['active'])) {
     exit(); // Asegura que el script se detenga después de redirigir
 }
 
+// Consulta para verificar la existencia de categorías
+$queryCategorias = "SELECT id_categoria FROM categorias";
+$resultCategorias = mysqli_query($open_connection, $queryCategorias);
+
+// Consulta para verificar la existencia de marcas
+$queryMarcas = "SELECT id_marca FROM marcas";
+$resultMarcas = mysqli_query($open_connection, $queryMarcas);
+
+// Variables para almacenar el estado de existencia de categorías y marcas
+$existenCategorias = mysqli_num_rows($resultCategorias) > 0;
+$existenMarcas = mysqli_num_rows($resultMarcas) > 0;
+
 ?>
 
 <?php include "inc/header.php"; ?>
@@ -32,7 +44,46 @@ if (empty($_SESSION['active'])) {
                         <?php
                         $query = "SELECT id_categoria FROM categorias";
                         $results = mysqli_query($open_connection, $query);
-                        if (mysqli_num_rows($results)>0) { ?>
+                        if (!$existenCategorias && !$existenMarcas) {
+                            // No existen ni categorías ni marcas
+                            echo '
+                            <div class="col-md-8 offset-md-2">
+                                <div class="alert alert-warning alert-outline-coloured alert-dismissible" role="alert">
+                                    <div class="alert-icon">
+                                        <i data-feather="alert-circle"></i>
+                                    </div>
+                                    <div class="alert-message">
+                                        Es necesario agregar categorías y marcas para luego añadir productos.
+                                    </div>
+                                </div>
+                            </div>';
+                        } elseif (!$existenCategorias) {
+                            // No existen categorías pero sí existen marcas
+                            echo '
+                            <div class="col-md-8 offset-md-2">
+                                <div class="alert alert-warning alert-outline-coloured alert-dismissible" role="alert">
+                                    <div class="alert-icon">
+                                        <i data-feather="alert-circle"></i>
+                                    </div>
+                                    <div class="alert-message">
+                                        Es necesario agregar categorías para luego añadir productos.
+                                    </div>
+                                </div>
+                            </div>';
+                        } elseif (!$existenMarcas) {
+                            // No existen marcas pero sí existen categorías
+                            echo '
+                            <div class="col-md-8 offset-md-2">
+                                <div class="alert alert-warning alert-outline-coloured alert-dismissible" role="alert">
+                                    <div class="alert-icon">
+                                        <i data-feather="alert-circle"></i>
+                                    </div>
+                                    <div class="alert-message">
+                                        Es necesario agregar marcas para luego añadir productos.
+                                    </div>
+                                </div>
+                            </div>';
+                        } else { ?>
                         <div class="col-12 col-md-10 offset-md-1 col-xl-6 offset-xl-3">
                             <div class="mt-3" id="success-add-product"></div>
                             <div class="card">
@@ -108,7 +159,7 @@ if (empty($_SESSION['active'])) {
                                                 <label class="form-label">Precio</label>
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text">S/.</span>
+                                                        <span class="input-group-text">S/</span>
                                                     </div>
                                                     <input type="decimal" name="precio" class="form-control"
                                                         placeholder="89.90" required>
@@ -135,20 +186,8 @@ if (empty($_SESSION['active'])) {
                                 </div>
                             </div>
                         </div>
-                        <?php 
-						} else { ?>
-                        <div class="col-md-8 offset-md-2">
-                            <div class="alert alert-primary alert-outline-coloured alert-dismissible" role="alert">
-                                <div class="alert-icon">
-                                    <i data-feather="alert-circle"></i>
-                                </div>
-                                <div class="alert-message">
-                                    Es necesario agregar categorías para luego añadir productos.
-                                </div>
-                            </div>
-                            <?php 
-                        }?>
-                        </div>
+                        <?php } ?>
                     </div>
+                </div>
             </main>
             <?php require_once("inc/footer.php"); ?>

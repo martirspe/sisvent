@@ -6,7 +6,7 @@ if(isset($_FILES['imagen']['tmp_name']) && !empty($_FILES['imagen']['tmp_name'])
     $imagen = $_FILES['imagen']['tmp_name'];
     $image_extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
     $image_name = 'img-' . date('dmY-His') . '.' . $image_extension;
-    $route = $_SERVER['DOCUMENT_ROOT'] . '/sispro/img/products/' . $image_name;
+    $route = $_SERVER['DOCUMENT_ROOT'] . '/sisvent/img/products/' . $image_name;
     $route_xampp = 'img/products/' . $image_name;
 } else {
     // Si no se recibió una imagen, asignar una por defecto

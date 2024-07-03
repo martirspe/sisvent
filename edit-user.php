@@ -157,7 +157,7 @@ $id_usuario = isset($_GET['id']) ? $_GET['id'] : '';
                                         <div class="form-group">
                                             <label class="form-label">Dirección</label>
                                             <input type="text" name="direccion" class="form-control"
-                                                placeholder="Ingrese una dirección"
+                                                placeholder="Ingrese la dirección de su domicilio"
                                                 value="<?php echo $row['direccion'] ?>" required>
                                         </div>
                                         <div class="form-row">
